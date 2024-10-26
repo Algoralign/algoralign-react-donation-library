@@ -1,0 +1,54 @@
+.donation-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.293);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.donation-modal .donation-modal-inner {
+  background-color: #fff;
+  border-radius: 10px;
+}
+.donation-modal-donation-amount-input {
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  width: 100%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  cursor: not-allowed;
+}
+.donation-modal-submit-btn {
+  padding: 0 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #2563eb;
+}
