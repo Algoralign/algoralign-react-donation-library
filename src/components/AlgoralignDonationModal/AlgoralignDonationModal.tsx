@@ -64,8 +64,6 @@ interface SendPhoneTokenResponse {
   data: string;
 }
 
-// https://dev.api.project.algoralign.com/api/v1/donor/retrieve-project?projectId=30a3e6a5-f504-4050-8f76-7a5df655f00c
-
 const AlgoralignDonationModal: FC<Props> = ({
   projectId,
   setIsShowDonationModal,
@@ -288,7 +286,8 @@ const AlgoralignDonationModal: FC<Props> = ({
     countryPhoneCodes[0].code
   );
   const baseApiUrl =
-    "https://dev.api.project.algoralign.com/api/v1/project-funding";
+    "https://api.project.algoralign.com/api/v1/project-funding";
+  // "https://dev.api.project.algoralign.com/api/v1/project-funding";
   const checkPaymentStatus = async () => {
     const payload = {
       accountNumber: virtualAccount?.data.accountNumber,

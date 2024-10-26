@@ -102,12 +102,11 @@ const AlgoralignDonationPage: FC<Props> = ({ projectId, xAlgoralignKey }) => {
     }
     return ""; // Return empty string if window is not defined
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://dev.api.project.algoralign.com/api/v1/project-funding/retrieve-project?projectId=${projectId}`,
+          `https://api.project.algoralign.com/api/v1/project-funding/retrieve-project?projectId=${projectId}`,
           {
             method: "GET",
             headers: {
