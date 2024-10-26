@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+/*  */
+
+/*  */
+
 .donation-modal {
   position: fixed;
   inset: 0;
@@ -202,6 +206,20 @@ input[type="number"] {
   border: none;
   background-color: rgb(243, 243, 243);
   font-size: 12px;
+}
+.init-donation-otp button {
+  display: none !important;
+}
+
+.send-donation-otp {
+  background-color: #2563eb !important;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.init-donation {
+  overflow-x: hidden;
 }
 .send-donation-otp {
   padding: 14px 10px !important;

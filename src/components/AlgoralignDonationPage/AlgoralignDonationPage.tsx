@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useState, useEffect } from "react";
 import "./algoralignDonationPage.css";
 // import AlgoralignDonationButton from "../AlgoralignDonationButton";
 import AlgoralignDonationModal from "../AlgoralignDonationModal";
+import DisplayProjectDescription from "../DisplayProjectDescription";
 
 interface Props {
   projectId: String;
@@ -208,12 +209,17 @@ const AlgoralignDonationPage: FC<Props> = ({ projectId, xAlgoralignKey }) => {
         <>
           <div className="project-status-container">
             <span className="funds-raised">
-              &#8358;{data.data.totalFundsRecieved || 0}
+              &#8358;
+              {new Intl.NumberFormat().format(data.data.totalFundsRecieved) ||
+                0}
             </span>{" "}
             <span>
               raised of{" "}
               <span className="funds-target">
-                &#8358;{data.data.project.fundingTarget}
+                &#8358;
+                {new Intl.NumberFormat().format(
+                  data.data.project.fundingTarget
+                )}
               </span>{" "}
               target
             </span>
@@ -303,9 +309,9 @@ const AlgoralignDonationPage: FC<Props> = ({ projectId, xAlgoralignKey }) => {
     /> */}
               </div>
               <div>
-                {/* <DisplayProjectDescription
-                description={data.data.project.description}
-              /> */}
+                <DisplayProjectDescription
+                  description={data!.data.project.description}
+                />
               </div>
             </div>
 
@@ -563,7 +569,7 @@ const AlgoralignDonationPage: FC<Props> = ({ projectId, xAlgoralignKey }) => {
                           <span className="preferences-section-title">
                             Initial Access
                           </span>
-                          <span className="access-phase-tag">Active</span>
+                          {/* <span className="access-phase-tag">Active</span> */}
                         </p>
                         <p className="access-phase-text">
                           10% of funds can be withdrawn.
