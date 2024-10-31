@@ -1,13 +1,14 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
-}
+} */
 
 /*  */
 
 /*  */
 
 .donation-modal {
+  backdrop-filter: blur(12px);
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.493);
@@ -34,11 +35,11 @@
   font-weight: medium;
 }
 .donation-modal-inner h4 {
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
 }
 .donation-modal-donation-amount-input {
-  padding: 13px 10px !important;
+  padding: 10px 10px !important;
   border-radius: 0.25rem;
   width: 100%;
   border: 1px solid rgba(161, 161, 170, 0.6);
@@ -84,9 +85,12 @@ input[type="number"] {
   border: none;
   font-weight: 500;
   color: #ffffff;
-  background-color: #2563eb;
+  background-color: #2563eb !important;
   cursor: pointer;
   margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .donation-modal-header {
@@ -141,6 +145,9 @@ input[type="number"] {
 .donation-account-details svg {
   transform: scale(0.8);
   cursor: pointer;
+}
+.donation-account-details p span {
+  font-size: 18px !important;
 }
 .donation-account-details {
   background-color: #f4f4f5;
@@ -256,11 +263,14 @@ input[type="number"] {
 }
 
 .liability-waiver-text {
-  font-size: 0.875rem;
+  font-size: 0.775rem;
   line-height: 1.25rem;
   font-weight: 500;
-  /* color: #3b82f6; */
   cursor: pointer;
+}
+.liability-waiver-text a {
+  color: #3b82f6;
+  text-decoration: underline;
 }
 .ive-sent-the-money-btn,
 .retry-donation-btn,
@@ -276,12 +286,18 @@ input[type="number"] {
   cursor: pointer;
   margin-top: 14px;
 }
-.ive-sent-the-money-btn,
-.back-to-display-donation-accounts-button {
+.ive-sent-the-money-btn {
   background-color: #2563eb;
   color: #fff;
 }
+.back-to-display-donation-accounts-button svg {
+  fill: #2563eb;
+}
 .back-to-display-donation-accounts-button {
+  background-color: #ffffff;
+  color: #2563eb !important;
+  border: 1px solid #2563eb !important;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -316,40 +332,27 @@ input[type="number"] {
   justify-content: end;
 }
 
+.donation-account-expired .donation-modal-header {
+  padding-bottom: 0px !important;
+}
+
 .donation-successful,
 .donation-account-expired h3 {
   margin: 15px 0 5px 0;
 }
-.donation-successful-check,
 .donation-account-expired-svg {
-  /* padding: 1rem; */
-  border-radius: 9999px;
-  /* background-color: #dbeafe; */
+  margin-top: 20px;
+  display: block;
+  width: 80px;
+  margin-inline: auto;
+  margin-bottom: 7px;
+}
+.donation-successful svg {
+  margin-top: 20px;
+  display: block;
   width: 100px;
-  height: 100px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-inline: auto;
   margin-bottom: 10px;
-}
-.donation-account-expired-svg {
-  background-color: #ffefef;
-}
-.donation-successful-check {
-  background-color: #dbeafe;
-}
-.donation-successful-check svg,
-.donation-account-expired-svg svg {
-  width: 30px;
-  height: 30px;
-}
-
-.donation-account-expired-svg svg {
-  fill: #d81d1d;
-}
-.donation-successful-check svg {
-  fill: #1d4ed8;
 }
 
 .ive-sent-the-money {
@@ -357,6 +360,7 @@ input[type="number"] {
 }
 .ive-sent-the-money h3 {
   margin-top: 10px;
+  font-weight: 500;
 }
 .ive-sent-the-money p {
   margin: 5px 0 10px 0;
@@ -446,7 +450,7 @@ input[type="number"] {
 }
 
 .donation-page-sidebar {
-  width: 250px;
+  width: 25%;
   position: sticky;
   top: 0;
   /* background: ; */
@@ -463,6 +467,14 @@ input[type="number"] {
 }
 
 @media (max-width: 768px) {
+  .funds-raised {
+    font-size: 1.4rem; /* Equivalent to text-2xl */
+  }
+
+  .funds-target {
+    font-size: 1.4rem; /* Equivalent to text-2xl */
+  }
+
   .donation-page-sidebar {
     display: none; /* Hide sidebar on mobile */
   }
@@ -840,13 +852,13 @@ input[type="number"] {
 }
 
 .funds-raised {
-  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-size: 1.3rem; /* Equivalent to text-2xl */
   font-weight: 600; /* Equivalent to font-semibold */
 }
 
 .funds-target {
   font-weight: 500; /* Equivalent to font-medium */
-  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-size: 1.3rem; /* Equivalent to text-2xl */
 }
 
 .donation-percentage-container {
@@ -1009,4 +1021,32 @@ input[type="number"] {
 
 .description-container {
   /* Container for description when less than 500 characters */
+}
+
+.donation-modal-footer {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  padding: 10px 0px 0px 0px; /* Optional padding */
+}
+
+.line {
+  flex: 1; /* Allow spans to grow */
+  height: 1px; /* Line thickness */
+  background-color: #dcdbdb; /* Line color */
+  margin: 0px; /* Spacing between line and image */
+}
+
+.donation-icon {
+  margin: 0px 10px;
+  width: 120px; /* Adjust based on your icon size */
+  /* height: 24px; Adjust based on your icon size */
+}
+
+.ive-sent-the-money-loader {
+  display: flex;
+  justify-content: center;
+}
+.ive-sent-the-money-loader img {
+  width: 50px;
 }

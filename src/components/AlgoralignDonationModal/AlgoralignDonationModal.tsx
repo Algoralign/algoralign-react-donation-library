@@ -12,9 +12,9 @@ type Step =
   | "display-donation-accounts"
   | "donation-successful"
   | "donation-account-expired"
-  | "ive-sent-the-money"
-  | "verify-phone"
-  | "phone-token-sent";
+  | "ive-sent-the-money";
+// | "verify-phone"
+// | "phone-token-sent";
 
 // Define the structure of the response from various endpoints
 interface CheckPaymentResponse {
@@ -70,205 +70,285 @@ const AlgoralignDonationModal: FC<Props> = ({
   xAlgoralignKey,
 }) => {
   const countryPhoneCodes = [
-    { country: "NG", code: "+234" },
-    { country: "AF", code: "+93" },
-    { country: "AL", code: "+355" },
-    { country: "DZ", code: "+213" },
-    { country: "AS", code: "+1-684" },
-    { country: "AD", code: "+376" },
-    { country: "AO", code: "+244" },
-    { country: "AG", code: "+1-268" },
-    { country: "AR", code: "+54" },
-    { country: "AM", code: "+374" },
-    { country: "AU", code: "+61" },
-    { country: "AT", code: "+43" },
-    { country: "AZ", code: "+994" },
-    { country: "BS", code: "+1-242" },
-    { country: "BH", code: "+973" },
-    { country: "BD", code: "+880" },
-    { country: "BB", code: "+1-246" },
-    { country: "BY", code: "+375" },
-    { country: "BE", code: "+32" },
-    { country: "BZ", code: "+501" },
-    { country: "BJ", code: "+229" },
-    { country: "BT", code: "+975" },
-    { country: "BO", code: "+591" },
-    { country: "BA", code: "+387" },
-    { country: "BW", code: "+267" },
-    { country: "BR", code: "+55" },
-    { country: "BN", code: "+673" },
-    { country: "BG", code: "+359" },
-    { country: "BF", code: "+226" },
-    { country: "BI", code: "+257" },
-    { country: "KH", code: "+855" },
-    { country: "CM", code: "+237" },
-    { country: "CA", code: "+1" },
-    { country: "CV", code: "+238" },
-    { country: "CF", code: "+236" },
-    { country: "TD", code: "+235" },
-    { country: "CL", code: "+56" },
-    { country: "CN", code: "+86" },
-    { country: "CO", code: "+57" },
-    { country: "KM", code: "+269" },
-    { country: "CG", code: "+242" },
-    { country: "CD", code: "+243" },
-    { country: "CR", code: "+506" },
-    { country: "HR", code: "+385" },
-    { country: "CU", code: "+53" },
-    { country: "CY", code: "+357" },
-    { country: "CZ", code: "+420" },
-    { country: "DK", code: "+45" },
-    { country: "DJ", code: "+253" },
-    { country: "DM", code: "+1-767" },
-    { country: "DO", code: "+1-809, +1-829, +1-849" },
-    { country: "EC", code: "+593" },
-    { country: "EG", code: "+20" },
-    { country: "SV", code: "+503" },
-    { country: "GQ", code: "+240" },
-    { country: "ER", code: "+291" },
-    { country: "EE", code: "+372" },
-    { country: "ET", code: "+251" },
-    { country: "FJ", code: "+679" },
-    { country: "FI", code: "+358" },
-    { country: "FR", code: "+33" },
-    { country: "GA", code: "+241" },
-    { country: "GM", code: "+220" },
-    { country: "GE", code: "+995" },
-    { country: "DE", code: "+49" },
-    { country: "GH", code: "+233" },
-    { country: "GR", code: "+30" },
-    { country: "GD", code: "+1-473" },
-    { country: "GT", code: "+502" },
-    { country: "GN", code: "+224" },
-    { country: "GW", code: "+245" },
-    { country: "GY", code: "+592" },
-    { country: "HT", code: "+509" },
-    { country: "HN", code: "+504" },
-    { country: "HU", code: "+36" },
-    { country: "IS", code: "+354" },
-    { country: "IN", code: "+91" },
-    { country: "ID", code: "+62" },
-    { country: "IR", code: "+98" },
-    { country: "IQ", code: "+964" },
-    { country: "IE", code: "+353" },
-    { country: "IL", code: "+972" },
-    { country: "IT", code: "+39" },
-    { country: "JM", code: "+1-876" },
-    { country: "JP", code: "+81" },
-    { country: "JO", code: "+962" },
-    { country: "KZ", code: "+7" },
-    { country: "KE", code: "+254" },
-    { country: "KI", code: "+686" },
-    { country: "KP", code: "+850" },
-    { country: "KR", code: "+82" },
-    { country: "KW", code: "+965" },
-    { country: "KG", code: "+996" },
-    { country: "LA", code: "+856" },
-    { country: "LV", code: "+371" },
-    { country: "LB", code: "+961" },
-    { country: "LS", code: "+266" },
-    { country: "LR", code: "+231" },
-    { country: "LY", code: "+218" },
-    { country: "LI", code: "+423" },
-    { country: "LT", code: "+370" },
-    { country: "LU", code: "+352" },
-    { country: "MG", code: "+261" },
-    { country: "MW", code: "+265" },
-    { country: "MY", code: "+60" },
-    { country: "MV", code: "+960" },
-    { country: "ML", code: "+223" },
-    { country: "MT", code: "+356" },
-    { country: "MH", code: "+692" },
-    { country: "MR", code: "+222" },
-    { country: "MU", code: "+230" },
-    { country: "MX", code: "+52" },
-    { country: "FM", code: "+691" },
-    { country: "MD", code: "+373" },
-    { country: "MC", code: "+377" },
-    { country: "MN", code: "+976" },
-    { country: "ME", code: "+382" },
-    { country: "MA", code: "+212" },
-    { country: "MZ", code: "+258" },
-    { country: "MM", code: "+95" },
-    { country: "NA", code: "+264" },
-    { country: "NR", code: "+674" },
-    { country: "NP", code: "+977" },
-    { country: "NL", code: "+31" },
-    { country: "NC", code: "+687" },
-    { country: "NZ", code: "+64" },
-    { country: "NI", code: "+505" },
-    { country: "NE", code: "+227" },
-
-    { country: "NU", code: "+683" },
-    { country: "MK", code: "+389" },
-    { country: "NO", code: "+47" },
-    { country: "OM", code: "+968" },
-    { country: "PK", code: "+92" },
-    { country: "PW", code: "+680" },
-    { country: "PS", code: "+970" },
-    { country: "PA", code: "+507" },
-    { country: "PG", code: "+675" },
-    { country: "PY", code: "+595" },
-    { country: "PE", code: "+51" },
-    { country: "PH", code: "+63" },
-    { country: "PL", code: "+48" },
-    { country: "PT", code: "+351" },
-    { country: "QA", code: "+974" },
-    { country: "RO", code: "+40" },
-    { country: "RU", code: "+7" },
-    { country: "RW", code: "+250" },
-    { country: "KN", code: "+1-869" },
-    { country: "LC", code: "+1-758" },
-    { country: "VC", code: "+1-784" },
-    { country: "WS", code: "+685" },
-    { country: "SM", code: "+378" },
-    { country: "ST", code: "+239" },
-    { country: "SA", code: "+966" },
-    { country: "SN", code: "+221" },
-    { country: "RS", code: "+381" },
-    { country: "SC", code: "+248" },
-    { country: "SL", code: "+232" },
-    { country: "SG", code: "+65" },
-    { country: "SK", code: "+421" },
-    { country: "SI", code: "+386" },
-    { country: "SB", code: "+677" },
-    { country: "SO", code: "+252" },
-    { country: "ZA", code: "+27" },
-    { country: "SS", code: "+211" },
-    { country: "ES", code: "+34" },
-    { country: "LK", code: "+94" },
-    { country: "SD", code: "+249" },
-    { country: "SR", code: "+597" },
-    { country: "SZ", code: "+268" },
-    { country: "SE", code: "+46" },
-    { country: "CH", code: "+41" },
-    { country: "SY", code: "+963" },
-    { country: "TW", code: "+886" },
-    { country: "TJ", code: "+992" },
-    { country: "TZ", code: "+255" },
-    { country: "TH", code: "+66" },
-    { country: "TL", code: "+670" },
-    { country: "TG", code: "+228" },
-    { country: "TO", code: "+676" },
-    { country: "TT", code: "+1-868" },
-    { country: "TN", code: "+216" },
-    { country: "TR", code: "+90" },
-    { country: "TM", code: "+993" },
-    { country: "TV", code: "+688" },
-    { country: "UG", code: "+256" },
-    { country: "UA", code: "+380" },
-    { country: "AE", code: "+971" },
-    { country: "GB", code: "+44" },
-    { country: "US", code: "+1" },
-    { country: "UY", code: "+598" },
-    { country: "UZ", code: "+998" },
-    { country: "VU", code: "+678" },
-    { country: "VA", code: "+379" },
-    { country: "VE", code: "+58" },
-    { country: "VN", code: "+84" },
-    { country: "YE", code: "+967" },
-    { country: "ZM", code: "+260" },
-    { country: "ZW", code: "+263" },
+    { country: "NGN", code: "+234", sampleNumber: "08172345678" },
+    { country: "AFG", code: "+93", sampleNumber: "0701234567" },
+    { country: "ALB", code: "+355", sampleNumber: "0681234567" },
+    { country: "DZA", code: "+213", sampleNumber: "0551234567" },
+    { country: "ASM", code: "+1-684", sampleNumber: "6847331234" },
+    { country: "AND", code: "+376", sampleNumber: "312345" },
+    { country: "AGO", code: "+244", sampleNumber: "923123456" },
+    { country: "ATG", code: "+1-268", sampleNumber: "2684621234" },
+    { country: "ARG", code: "+54", sampleNumber: "01112345678" },
+    { country: "ARM", code: "+374", sampleNumber: "077123456" },
+    { country: "AUS", code: "+61", sampleNumber: "0412345678" },
+    { country: "AUT", code: "+43", sampleNumber: "06641234567" },
+    { country: "AZE", code: "+994", sampleNumber: "0511234567" },
+    { country: "BHS", code: "+1-242", sampleNumber: "2423591234" },
+    { country: "BHR", code: "+973", sampleNumber: "36001234" },
+    { country: "BGD", code: "+880", sampleNumber: "01812345678" },
+    { country: "BRB", code: "+1-246", sampleNumber: "2462501234" },
+    { country: "BLR", code: "+375", sampleNumber: "0291234567" },
+    { country: "BEL", code: "+32", sampleNumber: "0471123456" },
+    { country: "BLZ", code: "+501", sampleNumber: "6101234" },
+    { country: "BEN", code: "+229", sampleNumber: "97123456" },
+    { country: "BTN", code: "+975", sampleNumber: "77123456" },
+    { country: "BOL", code: "+591", sampleNumber: "71234567" },
+    { country: "BIH", code: "+387", sampleNumber: "061123456" },
+    { country: "BWA", code: "+267", sampleNumber: "71345678" },
+    { country: "BRA", code: "+55", sampleNumber: "011912345678" },
+    { country: "BRN", code: "+673", sampleNumber: "7123456" },
+    { country: "BGR", code: "+359", sampleNumber: "0871234567" },
+    { country: "BFA", code: "+226", sampleNumber: "70123456" },
+    { country: "BDI", code: "+257", sampleNumber: "79561234" },
+    { country: "KHM", code: "+855", sampleNumber: "081234567" },
+    { country: "CMR", code: "+237", sampleNumber: "671234567" },
+    { country: "CAN", code: "+1", sampleNumber: "2045551234" },
+    { country: "CPV", code: "+238", sampleNumber: "9912345" },
+    { country: "CAF", code: "+236", sampleNumber: "70012345" },
+    { country: "TCD", code: "+235", sampleNumber: "63012345" },
+    { country: "CHL", code: "+56", sampleNumber: "0912345678" },
+    { country: "CHN", code: "+86", sampleNumber: "13112345678" },
+    { country: "COL", code: "+57", sampleNumber: "3011234567" },
+    { country: "COM", code: "+269", sampleNumber: "3212345" },
+    { country: "COG", code: "+242", sampleNumber: "061234567" },
+    { country: "COD", code: "+243", sampleNumber: "0812345678" },
+    { country: "CRI", code: "+506", sampleNumber: "83123456" },
+    { country: "HRV", code: "+385", sampleNumber: "0912345678" },
+    { country: "CUB", code: "+53", sampleNumber: "052123456" },
+    { country: "CYP", code: "+357", sampleNumber: "96123456" },
+    { country: "CZE", code: "+420", sampleNumber: "601234567" },
+    { country: "DNK", code: "+45", sampleNumber: "20123456" },
+    { country: "DJI", code: "+253", sampleNumber: "77831012" },
+    { country: "DMA", code: "+1-767", sampleNumber: "7672751234" },
+    { country: "DOM", code: "+1-809", sampleNumber: "8092345678" },
+    { country: "ECU", code: "+593", sampleNumber: "0991234567" },
+    { country: "EGY", code: "+20", sampleNumber: "01012345678" },
+    { country: "SLV", code: "+503", sampleNumber: "70123456" },
+    { country: "GNQ", code: "+240", sampleNumber: "222123456" },
+    { country: "ERI", code: "+291", sampleNumber: "071123456" },
+    { country: "EST", code: "+372", sampleNumber: "51234567" },
+    { country: "ETH", code: "+251", sampleNumber: "911234567" },
+    { country: "FJI", code: "+679", sampleNumber: "7012345" },
+    { country: "FIN", code: "+358", sampleNumber: "0412345678" },
+    { country: "FRA", code: "+33", sampleNumber: "0612345678" },
+    { country: "GAB", code: "+241", sampleNumber: "071234567" },
+    { country: "GMB", code: "+220", sampleNumber: "3012345" },
+    { country: "GEO", code: "+995", sampleNumber: "555123456" },
+    { country: "DEU", code: "+49", sampleNumber: "015112345678" },
+    { country: "GHA", code: "+233", sampleNumber: "0241234567" },
+    { country: "GRC", code: "+30", sampleNumber: "6912345678" },
+    { country: "GRD", code: "+1-473", sampleNumber: "4734031234" },
+    { country: "GTM", code: "+502", sampleNumber: "51234567" },
+    { country: "GIN", code: "+224", sampleNumber: "621234567" },
+    { country: "GNB", code: "+245", sampleNumber: "955123456" },
+    { country: "GUY", code: "+592", sampleNumber: "6212345" },
+    { country: "HTI", code: "+509", sampleNumber: "34123456" },
+    { country: "HND", code: "+504", sampleNumber: "91234567" },
+    { country: "HUN", code: "+36", sampleNumber: "0612345678" },
+    { country: "ISL", code: "+354", sampleNumber: "6112345" },
+    { country: "IND", code: "+91", sampleNumber: "09812345678" },
+    { country: "IDN", code: "+62", sampleNumber: "0812345678" },
+    { country: "IRN", code: "+98", sampleNumber: "09121234567" },
+    { country: "IRQ", code: "+964", sampleNumber: "07901234567" },
+    { country: "IRL", code: "+353", sampleNumber: "0851234567" },
+    { country: "ISR", code: "+972", sampleNumber: "0501234567" },
+    { country: "ITA", code: "+39", sampleNumber: "3123456789" },
+    { country: "JAM", code: "+1-876", sampleNumber: "8762101234" },
+    { country: "JPN", code: "+81", sampleNumber: "09012345678" },
+    { country: "JOR", code: "+962", sampleNumber: "0791234567" },
+    { country: "KAZ", code: "+7", sampleNumber: "7012345678" },
+    { country: "KEN", code: "+254", sampleNumber: "0712345678" },
+    { country: "KIR", code: "+686", sampleNumber: "28123456" },
+    { country: "PRK", code: "+850", sampleNumber: "191234567" },
+    { country: "KOR", code: "+82", sampleNumber: "01012345678" },
+    { country: "KWT", code: "+965", sampleNumber: "50001234" },
+    { country: "KGZ", code: "+996", sampleNumber: "0551234567" },
+    { country: "LAO", code: "+856", sampleNumber: "020123456" },
+    { country: "LVA", code: "+371", sampleNumber: "22123456" },
+    { country: "LBN", code: "+961", sampleNumber: "032123456" },
+    { country: "LSO", code: "+266", sampleNumber: "62912345" },
+    { country: "LIT", code: "+370", sampleNumber: "61234567" },
+    { country: "LUX", code: "+352", sampleNumber: "62123456" },
+    { country: "MAC", code: "+853", sampleNumber: "63123456" },
+    { country: "MDG", code: "+261", sampleNumber: "0321234567" },
+    { country: "MWI", code: "+265", sampleNumber: "0881234567" },
+    { country: "MYS", code: "+60", sampleNumber: "0123456789" },
+    { country: "MDV", code: "+960", sampleNumber: "79123456" },
+    { country: "MLI", code: "+223", sampleNumber: "66234567" },
+    { country: "MLT", code: "+356", sampleNumber: "79412345" },
+    { country: "MRT", code: "+222", sampleNumber: "22123456" },
+    { country: "MUS", code: "+230", sampleNumber: "52512345" },
+    { country: "MEX", code: "+52", sampleNumber: "5512345678" },
+    { country: "FSM", code: "+691", sampleNumber: "3201234" },
+    { country: "MDA", code: "+373", sampleNumber: "079123456" },
+    { country: "MNG", code: "+976", sampleNumber: "88123456" },
+    { country: "MNE", code: "+382", sampleNumber: "067123456" },
+    { country: "MAR", code: "+212", sampleNumber: "0612345678" },
+    { country: "MOZ", code: "+258", sampleNumber: "841234567" },
+    { country: "NAM", code: "+264", sampleNumber: "0811234567" },
+    { country: "NRU", code: "+674", sampleNumber: "1234567" },
+    { country: "NPL", code: "+977", sampleNumber: "9812345678" },
+    { country: "NLD", code: "+31", sampleNumber: "0612345678" },
+    { country: "NZL", code: "+64", sampleNumber: "0212345678" },
+    { country: "NIC", code: "+505", sampleNumber: "81123456" },
+    { country: "NER", code: "+227", sampleNumber: "90123456" },
+    { country: "NGA", code: "+234", sampleNumber: "08172345678" },
+    { country: "NOR", code: "+47", sampleNumber: "99123456" },
+    { country: "OMN", code: "+968", sampleNumber: "92123456" },
+    { country: "PAK", code: "+92", sampleNumber: "0301234567" },
+    { country: "PLW", code: "+680", sampleNumber: "7771234" },
+    { country: "PSE", code: "+970", sampleNumber: "0591234567" },
+    { country: "PAN", code: "+507", sampleNumber: "61234567" },
+    { country: "PNG", code: "+675", sampleNumber: "71234567" },
+    { country: "PRY", code: "+595", sampleNumber: "098123456" },
+    { country: "PER", code: "+51", sampleNumber: "991234567" },
+    { country: "PHL", code: "+63", sampleNumber: "09171234567" },
+    { country: "POL", code: "+48", sampleNumber: "501234567" },
+    { country: "PRT", code: "+351", sampleNumber: "912345678" },
+    { country: "QAT", code: "+974", sampleNumber: "30001234" },
+    { country: "ROU", code: "+40", sampleNumber: "0721123456" },
+    { country: "RUS", code: "+7", sampleNumber: "9111234567" },
+    { country: "RWA", code: "+250", sampleNumber: "0781234567" },
+    { country: "WSM", code: "+685", sampleNumber: "12345" },
+    { country: "SMR", code: "+378", sampleNumber: "0541234567" },
+    { country: "STP", code: "+239", sampleNumber: "9912345" },
+    { country: "SAU", code: "+966", sampleNumber: "500012345" },
+    { country: "SEN", code: "+221", sampleNumber: "773456789" },
+    { country: "SRB", code: "+381", sampleNumber: "0641234567" },
+    { country: "SYC", code: "+248", sampleNumber: "2512345" },
+    { country: "SLE", code: "+232", sampleNumber: "076123456" },
+    { country: "SGP", code: "+65", sampleNumber: "91234567" },
+    { country: "SVK", code: "+421", sampleNumber: "0901234567" },
+    { country: "SVN", code: "+386", sampleNumber: "031123456" },
+    { country: "SLB", code: "+677", sampleNumber: "12345" },
+    { country: "SOM", code: "+252", sampleNumber: "061234567" },
+    { country: "ZAF", code: "+27", sampleNumber: "0612345678" },
+    { country: "ESP", code: "+34", sampleNumber: "612345678" },
+    { country: "LKA", code: "+94", sampleNumber: "0712345678" },
+    { country: "SDN", code: "+249", sampleNumber: "0912345678" },
+    { country: "SUR", code: "+597", sampleNumber: "7212345" },
+    { country: "SWE", code: "+46", sampleNumber: "0701234567" },
+    { country: "CHE", code: "+41", sampleNumber: "0761234567" },
+    { country: "SYR", code: "+963", sampleNumber: "0931234567" },
+    { country: "TJK", code: "+992", sampleNumber: "910123456" },
+    { country: "TZA", code: "+255", sampleNumber: "0712345678" },
+    { country: "THA", code: "+66", sampleNumber: "0812345678" },
+    { country: "TLS", code: "+670", sampleNumber: "733123456" },
+    { country: "TGO", code: "+228", sampleNumber: "90123456" },
+    { country: "TON", code: "+676", sampleNumber: "123456" },
+    { country: "TTO", code: "+1-868", sampleNumber: "8686231234" },
+    { country: "TUN", code: "+216", sampleNumber: "20123456" },
+    { country: "TUR", code: "+90", sampleNumber: "5301234567" },
+    { country: "TKM", code: "+993", sampleNumber: "123456789" },
+    { country: "TUV", code: "+688", sampleNumber: "12345" },
+    { country: "UGA", code: "+256", sampleNumber: "0701234567" },
+    { country: "UKR", code: "+380", sampleNumber: "0671234567" },
+    { country: "ARE", code: "+971", sampleNumber: "0501234567" },
+    { country: "GBR", code: "+44", sampleNumber: "07123456789" },
+    { country: "USA", code: "+1", sampleNumber: "2025550123" },
+    { country: "URY", code: "+598", sampleNumber: "098123456" },
+    { country: "UZB", code: "+998", sampleNumber: "90-123-4567" },
+    { country: "VUT", code: "+678", sampleNumber: "12345" },
+    { country: "VEN", code: "+58", sampleNumber: "0412123456" },
+    { country: "VNM", code: "+84", sampleNumber: "0912345678" },
+    { country: "YEM", code: "+967", sampleNumber: "733123456" },
+    { country: "ZMB", code: "+260", sampleNumber: "0971234567" },
+    { country: "ZWE", code: "+263", sampleNumber: "0712345678" },
+    { country: "MWI", code: "+265", sampleNumber: "987654321" },
+    { country: "MYS", code: "+60", sampleNumber: "456123789" },
+    { country: "MDV", code: "+960", sampleNumber: "789321654" },
+    { country: "MLI", code: "+223", sampleNumber: "321789654" },
+    { country: "MLT", code: "+356", sampleNumber: "654789321" },
+    { country: "MHL", code: "+692", sampleNumber: "159753486" },
+    { country: "MRT", code: "+222", sampleNumber: "753951468" },
+    { country: "MUS", code: "+230", sampleNumber: "864213579" },
+    { country: "MEX", code: "+52", sampleNumber: "214365870" },
+    { country: "FSM", code: "+691", sampleNumber: "987213465" },
+    { country: "MDA", code: "+373", sampleNumber: "435672189" },
+    { country: "MCO", code: "+377", sampleNumber: "876234519" },
+    { country: "MNG", code: "+976", sampleNumber: "621987534" },
+    { country: "MNE", code: "+382", sampleNumber: "354987210" },
+    { country: "MAR", code: "+212", sampleNumber: "798054321" },
+    { country: "MOZ", code: "+258", sampleNumber: "452316789" },
+    { country: "MMR", code: "+95", sampleNumber: "963258741" },
+    { country: "NAM", code: "+264", sampleNumber: "125487936" },
+    { country: "NRU", code: "+674", sampleNumber: "368752190" },
+    { country: "NPL", code: "+977", sampleNumber: "740298156" },
+    { country: "NLD", code: "+31", sampleNumber: "193572846" },
+    { country: "NCL", code: "+687", sampleNumber: "572983410" },
+    { country: "NZL", code: "+64", sampleNumber: "830619472" },
+    { country: "NIC", code: "+505", sampleNumber: "481327695" },
+    { country: "NER", code: "+227", sampleNumber: "239748651" },
+    { country: "NIU", code: "+683", sampleNumber: "761259348" },
+    { country: "MKD", code: "+389", sampleNumber: "924753861" },
+    { country: "NOR", code: "+47", sampleNumber: "567132490" },
+    { country: "OMN", code: "+968", sampleNumber: "490586273" },
+    { country: "PAK", code: "+92", sampleNumber: "382157946" },
+    { country: "PLW", code: "+680", sampleNumber: "547193628" },
+    { country: "PSE", code: "+970", sampleNumber: "320459187" },
+    { country: "PAN", code: "+507", sampleNumber: "679283410" },
+    { country: "PNG", code: "+675", sampleNumber: "129675483" },
+    { country: "PRY", code: "+595", sampleNumber: "748219635" },
+    { country: "PER", code: "+51", sampleNumber: "695317842" },
+    { country: "PHL", code: "+63", sampleNumber: "802369574" },
+    { country: "POL", code: "+48", sampleNumber: "567830219" },
+    { country: "PRT", code: "+351", sampleNumber: "248193756" },
+    { country: "QAT", code: "+974", sampleNumber: "314562879" },
+    { country: "ROU", code: "+40", sampleNumber: "753490182" },
+    { country: "RUS", code: "+7", sampleNumber: "286437159" },
+    { country: "RWA", code: "+250", sampleNumber: "497213685" },
+    { country: "KNA", code: "+1-869", sampleNumber: "168923754" },
+    { country: "LCA", code: "+1-758", sampleNumber: "537896241" },
+    { country: "VCT", code: "+1-784", sampleNumber: "312567894" },
+    { country: "WSM", code: "+685", sampleNumber: "458129736" },
+    { country: "SMR", code: "+378", sampleNumber: "632174589" },
+    { country: "STP", code: "+239", sampleNumber: "814276395" },
+    { country: "SAU", code: "+966", sampleNumber: "293167548" },
+    { country: "SEN", code: "+221", sampleNumber: "795381642" },
+    { country: "SRB", code: "+381", sampleNumber: "348162790" },
+    { country: "SYC", code: "+248", sampleNumber: "572841369" },
+    { country: "SLE", code: "+232", sampleNumber: "619374852" },
+    { country: "SGP", code: "+65", sampleNumber: "789512436" },
+    { country: "SVK", code: "+421", sampleNumber: "123874569" },
+    { country: "SVN", code: "+386", sampleNumber: "856279314" },
+    { country: "SLB", code: "+677", sampleNumber: "912354678" },
+    { country: "SOM", code: "+252", sampleNumber: "374825196" },
+    { country: "ZAF", code: "+27", sampleNumber: "582693147" },
+    { country: "SSD", code: "+211", sampleNumber: "941376258" },
+    { country: "ESP", code: "+34", sampleNumber: "817645329" },
+    { country: "LKA", code: "+94", sampleNumber: "509836172" },
+    { country: "SDN", code: "+249", sampleNumber: "263478915" },
+    { country: "SUR", code: "+597", sampleNumber: "587316294" },
+    { country: "SWZ", code: "+268", sampleNumber: "194283756" },
+    { country: "SWE", code: "+46", sampleNumber: "683124759" },
+    { country: "CHE", code: "+41", sampleNumber: "719845362" },
+    { country: "SYR", code: "+963", sampleNumber: "206385197" },
+    { country: "TWN", code: "+886", sampleNumber: "478152396" },
+    { country: "TJK", code: "+992", sampleNumber: "849721365" },
+    { country: "TZA", code: "+255", sampleNumber: "530124986" },
+    { country: "THA", code: "+66", sampleNumber: "210493876" },
+    { country: "TLS", code: "+670", sampleNumber: "756983241" },
+    { country: "TGO", code: "+228", sampleNumber: "938416752" },
+    { country: "TON", code: "+676", sampleNumber: "614329587" },
+    { country: "TTO", code: "+1-868", sampleNumber: "512943876" },
+    { country: "TUN", code: "+216", sampleNumber: "763284915" },
+    { country: "TUR", code: "+90", sampleNumber: "291538476" },
+    { country: "TKM", code: "+993", sampleNumber: "734196258" },
+    { country: "TUV", code: "+688", sampleNumber: "587142369" },
+    { country: "UGA", code: "+256", sampleNumber: "139528476" },
+    { country: "UKR", code: "+380", sampleNumber: "724193865" },
+    { country: "ARE", code: "+971", sampleNumber: "416273589" },
+    { country: "GBR", code: "+44", sampleNumber: "985637124" },
+    { country: "USA", code: "+1", sampleNumber: "789345216" },
+    { country: "URY", code: "+598", sampleNumber: "627491385" },
+    { country: "UZB", code: "+998", sampleNumber: "351824796" },
+    { country: "VUT", code: "+678", sampleNumber: "285731964" },
+    { country: "VAT", code: "+379", sampleNumber: "813259476" },
+    { country: "VEN", code: "+58", sampleNumber: "239465178" },
+    { country: "VNM", code: "+84", sampleNumber: "769231548" },
+    { country: "YEM", code: "+967", sampleNumber: "541798236" },
+    { country: "ZMB", code: "+260", sampleNumber: "492716538" },
+    { country: "ZWE", code: "+263", sampleNumber: "783492615" },
   ];
 
   const [donationAmount, setDonationAmount] = useState<number | null>(null);
@@ -285,9 +365,38 @@ const AlgoralignDonationModal: FC<Props> = ({
   const [selectedCountry, setSelectedCountry] = useState<string>(
     countryPhoneCodes[0].code
   );
+
+  const donationModalFooter = () => {
+    return (
+      <div className="donation-modal-footer">
+        <span className="line"></span>
+        <a href="https://algoralign.com/" target="_blank">
+          {" "}
+          <img
+            src="https://svgshare.com/i/1C2z.svg"
+            alt="Donation Icon"
+            className="donation-icon"
+          />
+        </a>
+        <span className="line"></span>
+      </div>
+    );
+  };
+  useEffect(() => {
+    if (!error) {
+      return; // Exit early if there's no error
+    }
+
+    const timeoutId = setTimeout(() => {
+      setError(null); // Reset error after 5 seconds
+    }, 5000);
+
+    return () => clearTimeout(timeoutId); // Cleanup on unmount or error change
+  }, [error]);
+
   const baseApiUrl =
-    "https://api.project.algoralign.com/api/v1/project-funding";
-  // "https://dev.api.project.algoralign.com/api/v1/project-funding";
+    // "https://api.project.algoralign.com/api/v1/project-funding";
+    "https://dev.api.project.algoralign.com/api/v1/project-funding";
   const checkPaymentStatus = async () => {
     const payload = {
       accountNumber: virtualAccount?.data.accountNumber,
@@ -314,7 +423,7 @@ const AlgoralignDonationModal: FC<Props> = ({
       }
     } catch (error) {
       setError("Error while creating virtual account:");
-      setTimeout(() => setError(null), 5000);
+      // setTimeout(() => setError(null), 5000);
     }
   };
 
@@ -392,6 +501,14 @@ const AlgoralignDonationModal: FC<Props> = ({
     setIsShowDonationModal(false);
   };
 
+  const handleSelectCountryCode = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    let value = event.target.value;
+    setSelectedCountry(value);
+    setIsShowOtpInput(false);
+    setOtp("");
+  };
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
     const numericValue = value.replace(/,/g, "");
@@ -419,6 +536,12 @@ const AlgoralignDonationModal: FC<Props> = ({
   const validateDonationAmountAndPhoneNumber = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // when users click "enter" button the form submits, this is to check if the otp input is visisble then only call verifyOtp() function
+    if (IsShowOtpInput) {
+      verifyOtp();
+      return;
+    }
+
     if (IsShowOtpInput) {
       setIsShowOtpInput(false);
     }
@@ -431,27 +554,27 @@ const AlgoralignDonationModal: FC<Props> = ({
     if (!phoneNumber.trim()) {
       setIsLoading(false);
       setError("Phone number is required.");
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
+      // setTimeout(() => {
+      //   setError(null);
+      // }, 5000);
       return;
     }
 
     if (!phoneRegex.test(phoneNumber)) {
       setIsLoading(false);
       setError("Invalid phone number format.");
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
+      // setTimeout(() => {
+      //   setError(null);
+      // }, 5000);
       return;
     }
 
     if (donationAmount === null || donationAmount <= 0) {
       setIsLoading(false);
       setError("Donation amount is required and must be greater than 0.");
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
+      // setTimeout(() => {
+      //   setError(null);
+      // }, 5000);
       return;
     }
 
@@ -483,7 +606,7 @@ const AlgoralignDonationModal: FC<Props> = ({
         setIsShowOtpInput(true);
       } else {
         setError(data.message[0]);
-        setTimeout(() => setError(null), 5000);
+        // setTimeout(() => setError(null), 5000);
       }
       setIsLoading(false);
     } catch (error) {
@@ -495,7 +618,7 @@ const AlgoralignDonationModal: FC<Props> = ({
   const verifyOtp = async () => {
     setIsLoading(true);
     const payload = {
-      phone: "+23407080961583",
+      phone: selectedCountry + phoneNumber,
       action: "signup",
       code: otp,
     };
@@ -527,7 +650,7 @@ const AlgoralignDonationModal: FC<Props> = ({
       const data = await response.json();
       if (data.statusCode !== 200) {
         setError("Check otp and try again");
-        setTimeout(() => setError(null), 2000);
+        // setTimeout(() => setError(null), 2000);
         setIsLoading(false);
         return;
       }
@@ -543,14 +666,18 @@ const AlgoralignDonationModal: FC<Props> = ({
     navigator.clipboard.writeText(virtualAccount?.data.accountNumber);
     setIsCopied(true);
 
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setIsCopied(false);
+    // }, 2000);
   }
 
   const [timeLeft, setTimeLeft] = useState<number>(30 * 60); // 30 minutes in seconds
-
   useEffect(() => {
+    // Check if the current step allows the timer to run
+    if (step !== "display-donation-accounts") {
+      return; // Exit if the step is not valid
+    }
+
     // Exit if there's no time left
     if (timeLeft <= 0) {
       setStep("donation-account-expired"); // Call the function when the time hits 0
@@ -559,12 +686,18 @@ const AlgoralignDonationModal: FC<Props> = ({
 
     // Create an interval to update the time left every second
     const intervalId = setInterval(() => {
-      setTimeLeft(timeLeft - 1);
+      setTimeLeft((prevTimeLeft) => {
+        if (prevTimeLeft <= 1) {
+          setStep("donation-account-expired"); // Call the function when the time hits 0
+          return 0; // Stop the timer
+        }
+        return prevTimeLeft - 1; // Decrement the time left
+      });
     }, 1000);
 
-    // Clear the interval when the component is unmounted or the timeLeft changes
+    // Clear the interval when the component is unmounted or step/timeLeft changes
     return () => clearInterval(intervalId);
-  }, [timeLeft]);
+  }, [step, timeLeft]); // Added 'step' as a dependency
 
   // Format the time left in MM:SS format
   const formatTime = (seconds: number) => {
@@ -618,18 +751,22 @@ const AlgoralignDonationModal: FC<Props> = ({
               <select
                 id="country-select"
                 value={selectedCountry}
-                onChange={(event) => setSelectedCountry(event.target.value)}
+                onChange={handleSelectCountryCode}
               >
                 {countryPhoneCodes.map((country, index) => (
                   <option key={index} value={country.code}>
-                    {country.country.slice(0, 3)} ({country.code})
+                    {country.country.slice(0, 2)} ({country.code})
                   </option>
                 ))}
               </select>
               <input
                 className="donation-modal-phone-input"
                 type="text"
-                placeholder="0908 993 9393"
+                placeholder={
+                  countryPhoneCodes.find(
+                    (item) => item.code === selectedCountry
+                  )!.sampleNumber
+                }
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
               />
@@ -668,7 +805,11 @@ const AlgoralignDonationModal: FC<Props> = ({
                 />
                 <div className="liability-waiver-text">
                   By continuing, you agree with Algoralign&apos;s{" "}
-                  <a href="#" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://algoralign.com/donation-liability-waiver"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Liability Waiver
                   </a>
                   .
@@ -688,14 +829,13 @@ const AlgoralignDonationModal: FC<Props> = ({
               {isLoading ? spinner() : "Next"}
             </button>
           )}
+
+          {donationModalFooter()}
         </form>
       )}
 
       {step === "display-donation-accounts" && donationAmount && (
-        <form
-          onSubmit={validateDonationAmountAndPhoneNumber}
-          className="display-donation-accounts donation-modal-inner"
-        >
+        <div className="display-donation-accounts donation-modal-inner">
           <div className="donation-modal-header">
             <svg
               onClick={handleClose}
@@ -719,7 +859,10 @@ const AlgoralignDonationModal: FC<Props> = ({
             <div className="donation-account-details">
               <h5>Bank Name</h5>
               <p>
-                <span>{virtualAccount.data.bankName}</span>
+                <span>
+                  {virtualAccount.data.bankName} (
+                  {virtualAccount.data.beneficiary})
+                </span>
               </p>
               <h5>Account Number</h5>
               <p>
@@ -742,7 +885,11 @@ const AlgoralignDonationModal: FC<Props> = ({
                 )}
               </p>
               <h5>Amount</h5>
-              <p>NGN {new Intl.NumberFormat().format(donationAmount)}</p>
+              <p>
+                <span>
+                  NGN {new Intl.NumberFormat().format(donationAmount)}
+                </span>
+              </p>
 
               <div className="donation-warning-text">
                 This account is for this transaction only and expires in
@@ -761,46 +908,52 @@ const AlgoralignDonationModal: FC<Props> = ({
               I&apos;ve sent the money.
             </button>
           </div>
-        </form>
+
+          {donationModalFooter()}
+        </div>
       )}
 
       {step === "donation-successful" && (
         <div className="donation-successful donation-modal-inner ">
-          <div className="donation-modal-header">
-            {/* <h3>Transfer Funds</h3> */}
+          <div>
             <svg
-              onClick={handleClose}
-              className="close-donation-modal"
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 512 512"
-              height="1em"
-              width="1em"
+              width="100"
+              height="100"
+              viewBox="0 0 161 161"
+              fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="m289.94 256 95-95A24 24 0 0 0 351 127l-95 95-95-95a24 24 0 0 0-34 34l95 95-95 95a24 24 0 1 0 34 34l95-95 95 95a24 24 0 0 0 34-34z"></path>
+              <g clip-path="url(#clip0_3084_830)">
+                <path
+                  d="M161 80.5C161 36.0411 124.959 0 80.5 0C36.0411 0 0 36.0411 0 80.5C0 124.959 36.0411 161 80.5 161C124.959 161 161 124.959 161 80.5Z"
+                  fill="#DBEAFE"
+                />
+                <path
+                  d="M119.879 80.5C119.879 58.7517 102.248 41.1212 80.4999 41.1212C58.7516 41.1212 41.1211 58.7517 41.1211 80.5C41.1211 102.248 58.7516 119.879 80.4999 119.879C102.248 119.879 119.879 102.248 119.879 80.5Z"
+                  fill="#BFDBFE"
+                />
+                <path
+                  d="M75.6108 92.697L63.4243 80.8039L66.4709 77.8299L75.6108 86.7504L95.2263 67.606L98.2728 70.5793L75.6108 92.697Z"
+                  fill="#3B82F6"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_3084_830">
+                  <rect width="161" height="161" fill="white" />
+                </clipPath>
+              </defs>
             </svg>
+            <h3 className="">Thank You for Your Donation!</h3>
+            <p>Your support means a lot to us.</p>
           </div>
-          <div>
-            <div className="donation-successful-check">
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 1024 1024"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path>
-              </svg>
-            </div>
-            <h3 className="">Payment Successful</h3>
-            <p>
-              {" "}
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-              deleniti beatae magnam blanditiis expedita amet at.
-            </p>
-          </div>
+          <a
+            href="https://donor.algoralign.com/"
+            target="_blank"
+            className="donation-modal-submit-btn"
+          >
+            Explore Your Donations ✨
+          </a>
+          {/* {donationModalFooter()} */}
         </div>
       )}
 
@@ -823,25 +976,38 @@ const AlgoralignDonationModal: FC<Props> = ({
             </svg>
           </div>
           <div>
-            <div className="donation-account-expired-svg">
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 24 24"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z"></path>
-                <path d="M11 6h2v5h-2zm0 6h2v2h-2z"></path>
-              </svg>
-            </div>
+            <svg
+              className="donation-account-expired-svg"
+              width="80"
+              height="80"
+              viewBox="0 0 151 151"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_3084_800)">
+                <path
+                  d="M151 75.5C151 33.8025 117.198 0 75.5 0C33.8025 0 0 33.8025 0 75.5C0 117.198 33.8025 151 75.5 151C117.198 151 151 117.198 151 75.5Z"
+                  fill="#FEDBDC"
+                />
+                <path
+                  d="M112.433 75.5C112.433 55.1025 95.8973 38.5671 75.4998 38.5671C55.1023 38.5671 38.5669 55.1025 38.5669 75.5C38.5669 95.8975 55.1023 112.433 75.4998 112.433C95.8973 112.433 112.433 95.8975 112.433 75.5Z"
+                  fill="#FEBFC0"
+                />
+                <path
+                  d="M74.029 79.9123H76.9706V82.8539H74.029V79.9123ZM74.029 68.1461H76.9706V76.9708H74.029V68.1461ZM75.4998 60.7922C67.366 60.7922 60.792 67.4107 60.792 75.5C60.792 79.4005 62.3415 83.1415 65.0998 85.9C66.4653 87.2656 68.0871 88.3494 69.8716 89.088C71.6555 89.8274 73.5682 90.2078 75.4998 90.2078C79.4003 90.2078 83.1413 88.6579 85.8998 85.9C88.6577 83.1415 90.2076 79.4005 90.2076 75.5C90.2076 73.5684 89.8271 71.6557 89.0878 69.8718C88.3492 68.0873 87.2654 66.4655 85.8998 65.1C84.5343 63.7343 82.9125 62.6509 81.128 61.9118C79.3441 61.1726 77.4314 60.7922 75.4998 60.7922ZM75.4998 87.2662C72.3791 87.2662 69.3866 86.0269 67.1798 83.82C64.9732 81.6132 63.7336 78.6207 63.7336 75.5C63.7336 72.3793 64.9732 69.3868 67.1798 67.18C69.3866 64.9734 72.3791 63.7338 75.4998 63.7338C78.6205 63.7338 81.613 64.9734 83.8198 67.18C86.0266 69.3868 87.266 72.3793 87.266 75.5C87.266 78.6207 86.0266 81.6132 83.8198 83.82C81.613 86.0269 78.6205 87.2662 75.4998 87.2662Z"
+                  fill="#F63B3E"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_3084_800">
+                  <rect width="151" height="151" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
             <h3 className=""> Transaction Timeout!</h3>
             <p>
-              {" "}
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-              deleniti beatae magnam blanditiis expedita amet at.
+              Your payment session has expired. Please initiate a new session by
+              clicking the button below.
             </p>
             <button
               onClick={() => createVirtualAccount()}
@@ -856,6 +1022,7 @@ const AlgoralignDonationModal: FC<Props> = ({
               I&apos;ve sent the money.
             </button>
           </div>
+          {donationModalFooter()}
         </div>
       )}
 
@@ -878,7 +1045,7 @@ const AlgoralignDonationModal: FC<Props> = ({
             </svg>
           </div>
           <div>
-            <div className="">
+            <div className="ive-sent-the-money-loader">
               <img src="https://s11.gifyu.com/images/SOdia.gif" />
             </div>
             <h3 className="">
@@ -909,6 +1076,7 @@ const AlgoralignDonationModal: FC<Props> = ({
               Account Details
             </button>
           </div>
+          {donationModalFooter()}
         </div>
       )}
     </div>
