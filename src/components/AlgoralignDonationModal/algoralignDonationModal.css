@@ -354,6 +354,16 @@ input[type="number"] {
   margin-inline: auto;
   margin-bottom: 10px;
 }
+.redirect-to-dashboard img {
+  width: 19px;
+}
+.redirect-to-dashboard {
+  font-size: 12px;
+  gap: 0px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .ive-sent-the-money {
   text-align: center;
